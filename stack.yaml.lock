@@ -19,6 +19,13 @@ packages:
   original:
     hackage: haskell-gettext-0.1.2.0
 - completed:
+    hackage: which-0.2.0.3@sha256:607f0cbb98340de7149d82d3aeecd6883fb2da2fdae92679bcef85488ad0bac7,918
+    pantry-tree:
+      sha256: decff656bfcd59e49dbbd82e03b2dcb6b4c2b6d49fb47a72f1a871b8b9e2d25f
+      size: 262
+  original:
+    hackage: which-0.2.0.3
+- completed:
     commit: 83ee30b43f74d2b6781269072cf5ed0f0e00012f
     git: https://github.com/rvl/configfile
     name: ConfigFile

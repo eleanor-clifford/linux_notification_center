@@ -18,6 +18,7 @@ import qualified Data.Text as Text
 import Data.Char ( chr )
 import System.Directory
 import System.Environment ( getExecutablePath )
+import System.Which ( which )
 import System.Exit ( die )
 import System.FilePath
 import System.Locale.SetLocale
@@ -36,7 +37,12 @@ getMoFile = do
   currentLocale        <- fromMaybe "en" <$> setLocale LC_ALL (Just "")
 
   -- Find location of folder holding translations installed by the Makefile.
-  applicationDirectory <- takeDirectory . takeDirectory <$> getExecutablePath
+  -- On some systems, getExecutablePath will return argv[0] rather than the
+  -- actual path. Use `which` to resolve this
+  executableInvocation <- getExecutablePath
+  maybeExecutablePath <- which executableInvocation
+  let executablePath = fromMaybe executableInvocation maybeExecutablePath
+  let applicationDirectory = takeDirectory . takeDirectory $ executablePath
   let localesDirectory = applicationDirectory </> "share" </> "locale"
 
   -- Create a list of paths to search for translations.
